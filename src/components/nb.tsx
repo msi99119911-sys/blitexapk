@@ -1,6 +1,8 @@
 import { cn } from "@/lib/utils";
 import { Link } from "react-router";
-import { LayoutGrid } from "lucide-react";
+import { LayoutGrid, Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 const linkCls =
   "border-2 border-border bg-card px-3 py-1.5 text-xs font-extrabold uppercase tracking-wide transition-colors hover:bg-muted";
@@ -29,6 +31,33 @@ export function NbLogo({ className }: { className?: string }) {
   );
 }
 
+/** Square sun/moon button that flips light ↔ dark (neobrutalist chip). */
+function ThemeToggle() {
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const isDark = resolvedTheme === "dark";
+  return (
+    <button
+      type="button"
+      aria-label="Toggle dark mode"
+      title="Toggle dark mode"
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      className="nb flex size-8 items-center justify-center bg-card transition-transform hover:-translate-y-0.5"
+    >
+      {mounted ? (
+        isDark ? (
+          <Sun className="size-4" />
+        ) : (
+          <Moon className="size-4" />
+        )
+      ) : (
+        <span className="size-4" />
+      )}
+    </button>
+  );
+}
+
 /**
  * Public site navbar. Deliberately carries no admin links, no sign-in
  * button, and no dashboard entry point — the public site is for browsing
@@ -45,6 +74,7 @@ export function NbNav() {
           </span>
         </Link>
         <nav className="flex items-center gap-2">
+          <ThemeToggle />
           <Link to="/" className={linkCls}>
             Home
           </Link>

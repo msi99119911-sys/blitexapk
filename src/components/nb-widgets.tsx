@@ -21,6 +21,13 @@ export function formatBytes(bytes: number): string {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }
 
+/** "Mar 8, 2026" style date for the checked stamp. */
+const checkedDateFmt = new Intl.DateTimeFormat(undefined, {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+});
+
 /** Big flat stat block with a number and a label. */
 export function NbStat({
   value,
@@ -137,13 +144,17 @@ export function NbAppCard({
   return (
     <article className="nb nb-press flex h-full flex-col bg-card p-5">
       {firstPreview && (
-        <div className="-mx-5 -mt-5 mb-4 overflow-hidden border-b-2 border-border">
+        <div className="relative -mx-5 -mt-5 mb-4 overflow-hidden border-b-2 border-border">
           <img
             src={firstPreview}
             alt={`${app.name} screenshot`}
             loading="lazy"
             className="aspect-video w-full object-cover"
           />
+          <span className="absolute left-3 top-3 inline-flex -rotate-3 items-center gap-1 border-2 border-border bg-accent px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-widest text-foreground">
+            <ShieldCheck className="size-3" />
+            Checked
+          </span>
         </div>
       )}
 
@@ -192,6 +203,10 @@ export function NbAppCard({
         <span className="flex items-center gap-1">
           <Flame className="size-3.5" />
           {app.downloads} {app.downloads === 1 ? "download" : "downloads"}
+        </span>
+        <span className="flex items-center gap-1">
+          <ShieldCheck className="size-3.5" />
+          Checked {checkedDateFmt.format(app._creationTime)}
         </span>
         {app.fileName && (
           <span className="max-w-[14rem] truncate normal-case tracking-normal">
