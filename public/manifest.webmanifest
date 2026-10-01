@@ -1,0 +1,17 @@
+{
+  "name": "Blitex APKs",
+  "short_name": "Blitex APKs",
+  "description": "Blitex APKs — a curated catalog of checked, virus-free APKs. Search, tap, download. Updated daily.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f6f2",
+  "theme_color": "#111111",
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
