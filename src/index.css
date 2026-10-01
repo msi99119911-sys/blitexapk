@@ -42,6 +42,12 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* Typography: Space Grotesk for text, Archivo for the big display type. */
+@theme {
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
+}
+
 /* Neobrutalism Minimalism: paper, ink, one loud yellow. */
 :root {
   --radius: 0rem;
@@ -118,6 +124,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-sans);
   }
   button:not([disabled]),
   [role="button"]:not([disabled]) {
@@ -159,6 +166,7 @@
 
   /* Bold display type. */
   .nb-display {
+    font-family: var(--font-display);
     font-weight: 900;
     letter-spacing: -0.03em;
     text-transform: uppercase;

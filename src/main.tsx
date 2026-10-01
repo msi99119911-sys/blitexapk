@@ -3,6 +3,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { RequireAuth } from "@/components/RequireAuth";
 import { ConvexAuthProvider } from "@convex-dev/auth/react";
 import { ConvexReactClient } from "convex/react";
+import { ThemeProvider } from "next-themes";
 import React, { StrictMode, useEffect, lazy, useRef, useState, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router";
@@ -208,6 +209,11 @@ function dismissSplash() {
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <RootErrorBoundary>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        disableTransitionOnChange
+      >
       <ToolbarErrorBoundary>
         <OptionalToolbar />
       </ToolbarErrorBoundary>
@@ -242,6 +248,7 @@ createRoot(document.getElementById("root")!).render(
       ) : (
         <MissingBackendUrl />
       )}
+      </ThemeProvider>
     </RootErrorBoundary>
   </StrictMode>,
 );
